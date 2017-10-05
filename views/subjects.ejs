@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>id</td>
+        <td>subject name</td>
+      </tr>
+      <%for(var subject of dataPassed.subjects){%>
+      <tr>
+        <td><%=subject.id%></td>
+        <td><%=subject.subject_name%></td>
+      </tr>        
+      <%}%>
+    </table>
+
+  </body>
+</html>

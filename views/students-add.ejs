@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <%if(locals.err){%>
+      <%=err%>
+    <%}%>
+    <form class="" action="/students/add" method="post">
+      first name:
+      <input type="text" name="first_name" value="">
+      last name:
+      <input type="text" name="last_name" value="">
+      email:
+      <input type="text" name="email" value="">
+      <input type="submit" name="" value="submit">
+    </form>
+  </body>
+</html>

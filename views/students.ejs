@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <a href="/students/add">add student</a>
+    <table>
+      <tr>
+        <td>id</td>
+        <td>first name</td>
+        <td>last name</td>
+        <td>email</td>
+        <td>action</td>
+      </tr>
+      <%for(var student of dataPassed.students){%>
+        <tr>
+          <td><%=student.id%></td>
+          <td><%=student.first_name%></td>
+          <td><%=student.last_name%></td>
+          <td><%=student.email%></td>
+          <td><a href="/students/edit/<%=student.id%>">edit</a>|<a href="/students/delete/<%=student.id%>">delete</a></td>
+        </tr>
+      <%}%>
+    </table>
+  </body>
+</html>
