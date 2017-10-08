@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/', (req, res)=>{
   let promiseChains = [
     Models.Teacher.findAll({
+      order :['first_name'],
       include: Models.Subject
     }),
     Models.Subject.findAll()
@@ -18,6 +19,7 @@ router.get('/', (req, res)=>{
     let subjects = values[1];
 
     let passedData ={};
+    passedData.pageTitle = 'Teachers'
     let teachersTemp = []
     for(let teacherObj of teachers){
       let teacher = teacherObj;

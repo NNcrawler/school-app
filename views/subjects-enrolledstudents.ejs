@@ -1,15 +1,17 @@
-<%-include('partials/header')%>
+<%-include('partials/header', {pageTitle:''})%>
     <%-include('partials/nav-bar')%>
-    <h1><%=subject.subject_name%></h1>
-    <table>
+    <h1 class="bg-success text-white">Subject Name : <%=subject.subject_name%></h1>
+    <table class="table">
       <tr>
-        <td>nama</td>
-        <td>score</td>
-        <td>score by letter</td>
+        <td>No</td>
+        <td>Name</td>
+        <td>Score</td>
+        <td>Score by letter</td>
       </tr>
-
+      <%var i =0%>
       <%for(let student of subject.Student){%>
       <tr>
+          <td><%=++i%></td>
           <td><%=student.getFullName()%></td>
           <td><%if(student.StudentSubject[0].score){%><%=student.StudentSubject[0].score%><%}else{%><a href="/subjects/<%=student.StudentSubject[0].id%>/givescore">Give Score</a><%}%></td>
           <td><%=student.scoreByLetter%></td>

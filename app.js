@@ -14,6 +14,9 @@ app.set('view engine', 'ejs');
 app.use('/teachers', teachers);
 app.use('/subjects', subjects);
 app.use('/students', students);
+app.get('/', (req, res)=>{
+  res.render('home',{pageTitle:'Home'});
+})
 
 app.listen(3000);
 

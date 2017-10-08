@@ -7,6 +7,7 @@ router.get('/', (req, res)=>{
   Models.Subject.findAll({include:Models.Teacher}).then((subjects)=>{
     //console.log(subjects);
     let dataPassed = {};
+    dataPassed.pageTitle='subjects'
     dataPassed.subjects = subjects;
     console.log(subjects[0].Teachers[0].getFullName());
     res.render('subjects', {dataPassed})
@@ -16,15 +17,18 @@ router.get('/', (req, res)=>{
 router.get('/:id/enrolledstudents', (req, res)=>{
   Models.Subject.findById(req.params.id,
     {
+      order:[[Models.Student, 'first_name']],
       include:[
         {
           model:Models.Student,
+
           as:'Student',
           include:[
             {
               model:Models.StudentSubjectRelation,
               attributes:['id', 'score'],
-              as:'StudentSubject'
+              as:'StudentSubject',
+              where:{SubjectId:req.params.id}
             }
           ]
         }
@@ -32,7 +36,9 @@ router.get('/:id/enrolledstudents', (req, res)=>{
     }
   )
   .then((subject)=>{
+    console.log(subject.Student[1].StudentSubject);
     let dataPassed = {subject}
+    dataPassed.pageTitle = 'Enrolled Students'
     for (let isubject in subject) {
       if(subject[isubject].hasOwnProperty('Student')){
         subject[isubject].Student=subject[isubject].Student.map((student) => {
@@ -55,7 +61,7 @@ router.post('/:id/givescore', (req, res)=>{
   .then((studentSubjectRelation)=>{
     studentSubjectRelation.score=req.body.score;
     studentSubjectRelation.save();
-    res.redirect('/subjects');
+    res.redirect(`/subjects/${req.params.id}/givescore`);
     //console.log(studentSubjectRelation);
   })
   //res.send(req.body.score)

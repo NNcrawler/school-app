@@ -4,15 +4,16 @@ const router = express.Router();
 const Models = require('../models');
 
 router.get('/',(req,res)=>{
-  Models.Student.findAll().then((students)=>{
+  Models.Student.findAll({order: ['first_name']}).then((students)=>{
     let dataPassed = {};
+    dataPassed.pageTitle = 'Students'
     dataPassed.students = students;
     res.render('students', {dataPassed})
   })
 })
 
 router.get('/add',(req,res)=>{
-  res.render('students-add',{})
+  res.render('students-add',{pageTitle:'students-add'})
 })
 
 router.post('/add', (req, res)=>{
@@ -24,6 +25,7 @@ router.post('/add', (req, res)=>{
     res.redirect('/students');
   }).catch((err)=>{
     let dataPassed={};
+    dataPassed.pageTitle='students-add'
     dataPassed.err = err == 'SequelizeUniqueConstraintError: Validation error'? 'email sudah dipakai':'email tidak valid';
     res.render('students-add',dataPassed);
   })
@@ -40,7 +42,7 @@ router.get('/delete/:id', (req, res)=>{
 router.get('/edit/:id', (req, res)=>{
   Models.Student.findById(req.params.id).then((student)=>{
     let dataPassed = {};
-    console.log(student.getFullName());
+    dataPassed.pageTitle = 'student-edit'
     dataPassed.student = student;
     res.render('students-edit', dataPassed);
   })
@@ -59,10 +61,19 @@ router.post('/edit/:id', (req, res)=>{
 })
 
 router.get('/:studentId/addsubject', (req, res)=>{
-  Models.Subject.findAll({attribute:['id', 'subject_name']}).then((subjects)=>{
+  let promiseChains = [
+    Models.Student.findById(req.params.studentId),
+    Models.Subject.findAll({attribute:['id', 'subject_name']})
+  ];
+  Promise.all(promiseChains)
+  .then((values)=>{
+    let student = values[0];
+    let subjects = values[1];
     let dataPassed = {
+      pageTitle:'add-subject',
       subjects,
-      StudentId:req.params.studentId
+      StudentId:req.params.studentId,
+      student
     }
     res.render('students-subjects-add', dataPassed)
     //res.send(subjects)
@@ -73,7 +84,7 @@ router.post('/:studentId/addsubject', (req, res)=>{
 
   Models.Student.findById(req.params.studentId).then((student)=>{
     //res.send(student)
-    return student.setSubject(parseInt(req.body.subject))
+    return student.addSubject(parseInt(req.body.subject))
   }).then(()=>{
     res.redirect('/students')
   })

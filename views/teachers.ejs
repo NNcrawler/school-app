@@ -1,16 +1,19 @@
-<%-include('partials/header')%>
+<%-include('partials/header', {pageTitle:passedData.pageTitle})%>
     <%-include('partials/nav-bar')%>
     <table class="table">
       <tr>
-        <td>first name</td>
-        <td>last name</td>
-        <td>email</td>
-        <td>subject</td>
-        <td>actions</td>
+        <td>No</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Email</td>
+        <td>Subject</td>
+        <td>Actions</td>
       </tr>
 
+      <%var i = 0%>
       <%for(var teacher of passedData.teachers){%>
       <tr>
+        <td><%=++i%></td>
         <td><%=teacher.first_name%></td>
         <td><%=teacher.last_name%></td>
         <td><%=teacher.email%></td>

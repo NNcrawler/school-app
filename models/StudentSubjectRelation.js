@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   StudentSubjectRelation.associate = function (models) {
-
+    // StudentSubjectRelation.belongsTo(models.Student);
+    // StudentSubjectRelation.belongsTo(models.Subject);
   }
   return StudentSubjectRelation;
 };

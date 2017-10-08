@@ -1,4 +1,4 @@
-<%-include('partials/header')%>
+<%-include('partials/header', {pageTitle:dataPassed.pageTitle})%>
     <%-include('partials/nav-bar')%>
     <table class="table">
       <tr>
@@ -11,7 +11,7 @@
       <tr>
         <td><%=subject.id%></td>
         <td><%=subject.subject_name%></td>
-        <td><%for(var teacher of subject.Teachers){%><%=teacher.getFullName()%> <br> <%}%></td>
+        <td><%for(var iteacher in subject.Teachers){%><%=parseInt(iteacher)+1%> <%=subject.Teachers[iteacher].getFullName()%> <br> <%}%></td>
         <td><a href="/subjects/<%=subject.id%>/enrolledstudents">enrolledstudents</a></td>
       </tr>
       <%}%>

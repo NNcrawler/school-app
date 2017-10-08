@@ -1,12 +1,27 @@
-<%-include('partials/header')%>
+<%-include('partials/header', {pageTitle})%>
     <%-include('partials/nav-bar')%>
-    subject added:
-    <form class="" action="/students/<%=StudentId%>/addsubject" method="post">
-      <select class="" name="subject">
-        <%for(var subject of subjects){%>
-        <option value="<%=subject.id%>"><%=subject.subject_name%></option>
-        <%}%>
-      </select>
-      <input type="submit" name="submit" value="submit">
-    </form>
+    <table class="table">
+      <tr>
+        <td>First Name : <%=student.first_name%></td>
+      </tr>
+      <tr>
+        <td>Last Name : <%=student.last_name%></td>
+      </tr>
+      <tr>
+        <td>Email : <%=student.email%></td>
+      </tr>
+      <tr>
+        <td>subject added : <form class="" action="/students/<%=StudentId%>/addsubject" method="post">
+          <select class="" name="subject">
+            <%for(var subject of subjects){%>
+            <option value="<%=subject.id%>"><%=subject.subject_name%></option>
+            <%}%>
+          </select>
+          <input type="submit" name="submit" value="submit">
+        </form></td>
+      </tr>
+
+    </table>
+
+
 <%-include('partials/footer')%>
