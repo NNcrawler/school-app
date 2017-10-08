@@ -21,5 +21,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
+    return queryInterface.removeConstraint('Students', 'custom_unique_constraint_name');
   }
 };

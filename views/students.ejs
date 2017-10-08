@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <a href="/students/add">add student</a>
-    <table>
+<%-include('partials/header')%>
+    <%-include('partials/nav-bar')%>
+    <table class="table">
       <tr>
         <td>id</td>
         <td>first name</td>
@@ -20,9 +14,9 @@
           <td><%=student.first_name%></td>
           <td><%=student.last_name%></td>
           <td><%=student.email%></td>
-          <td><a href="/students/edit/<%=student.id%>">edit</a>|<a href="/students/delete/<%=student.id%>">delete</a></td>
+          <td><a href="/students/<%=student.id%>/addsubject">add subject</a>|<a href="/students/edit/<%=student.id%>">edit</a>|<a href="/students/delete/<%=student.id%>">delete</a></td>
         </tr>
       <%}%>
     </table>
-  </body>
-</html>
+    <a href="/students/add">add student</a>
+<%-include('partials/footer')%>

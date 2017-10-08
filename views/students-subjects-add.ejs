@@ -1,0 +1,12 @@
+<%-include('partials/header')%>
+    <%-include('partials/nav-bar')%>
+    subject added:
+    <form class="" action="/students/<%=StudentId%>/addsubject" method="post">
+      <select class="" name="subject">
+        <%for(var subject of subjects){%>
+        <option value="<%=subject.id%>"><%=subject.subject_name%></option>
+        <%}%>
+      </select>
+      <input type="submit" name="submit" value="submit">
+    </form>
+<%-include('partials/footer')%>

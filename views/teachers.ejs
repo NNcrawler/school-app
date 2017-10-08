@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <table>
+<%-include('partials/header')%>
+    <%-include('partials/nav-bar')%>
+    <table class="table">
       <tr>
         <td>first name</td>
         <td>last name</td>
         <td>email</td>
+        <td>subject</td>
+        <td>actions</td>
       </tr>
 
       <%for(var teacher of passedData.teachers){%>
@@ -17,9 +14,30 @@
         <td><%=teacher.first_name%></td>
         <td><%=teacher.last_name%></td>
         <td><%=teacher.email%></td>
+        <td><%if(teacher.Subject){%>
+          <%=teacher.Subject.dataValues.subject_name%>
+          <%}else{%>
+            <%='Unassigned'%>
+          <%}%>
+        </td>
+        <td><a href="/teachers/edit/<%=teacher.id%>">edit</a>|<a href="/teachers/delete/<%=teacher.id%>">delete</a></td>
       </tr>
       <%}%>
-
     </table>
-  </body>
-</html>
+    <form class="" action="/teachers" method="post">
+      First Name:
+      <input type="text" name="first_name" value="">
+      Last Name:
+      <input type="text" name="last_name" value="">
+      Email:
+      <input type="text" name="email" value="">
+      Subject:
+      <select class="" name="SubjectId">
+        <option value=""></option>
+        <%for(var subject of passedData.subjects){%>
+          <option value="<%=subject.id%>"><%=subject.subject_name%></option>
+        <%}%>
+      </select>
+      <input type="submit" name="" value="submit">
+    </form>
+<%-include('partials/footer')%>

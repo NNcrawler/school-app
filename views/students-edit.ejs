@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+<%-include('partials/header')%>
+    <%-include('partials/nav-bar')%>
     <form class="" action="/students/edit/<%=student.id%>" method="post">
       first name:
       <input type="text" name="first_name" value="<%=student.first_name%>">
@@ -14,5 +9,4 @@
       <input type="text" name="email" value="<%=student.email%>">
       <input type="submit" name="" value="submit">
     </form>
-  </body>
-</html>
+<%-include('partials/footer')%>

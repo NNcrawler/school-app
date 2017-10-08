@@ -58,4 +58,25 @@ router.post('/edit/:id', (req, res)=>{
   })
 })
 
+router.get('/:studentId/addsubject', (req, res)=>{
+  Models.Subject.findAll({attribute:['id', 'subject_name']}).then((subjects)=>{
+    let dataPassed = {
+      subjects,
+      StudentId:req.params.studentId
+    }
+    res.render('students-subjects-add', dataPassed)
+    //res.send(subjects)
+  })
+})
+
+router.post('/:studentId/addsubject', (req, res)=>{
+
+  Models.Student.findById(req.params.studentId).then((student)=>{
+    //res.send(student)
+    return student.setSubject(parseInt(req.body.subject))
+  }).then(()=>{
+    res.redirect('/students')
+  })
+})
+
 module.exports = router;

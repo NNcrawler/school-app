@@ -1,0 +1,20 @@
+<%-include('partials/header')%>
+    <%-include('partials/nav-bar')%>
+    <h1><%=subject.subject_name%></h1>
+    <table>
+      <tr>
+        <td>nama</td>
+        <td>score</td>
+        <td>score by letter</td>
+      </tr>
+
+      <%for(let student of subject.Student){%>
+      <tr>
+          <td><%=student.getFullName()%></td>
+          <td><%if(student.StudentSubject[0].score){%><%=student.StudentSubject[0].score%><%}else{%><a href="/subjects/<%=student.StudentSubject[0].id%>/givescore">Give Score</a><%}%></td>
+          <td><%=student.scoreByLetter%></td>
+      </tr>
+      <%}%>
+
+    </table>
+<%-include('partials/footer')%>

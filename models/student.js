@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
+  Student.associate = function (models) {
+    Student.belongsToMany(models.Subject, {as:'Subject',through:'StudentSubjectRelation'});
+    Student.hasMany(models.StudentSubjectRelation, {as:'StudentSubject'});
+    //Student.belongsToMany(models.Subject, )
+  }
+
   Student.prototype.getFullName=function() {
     return `${this.first_name} ${this.last_name}`;
   };

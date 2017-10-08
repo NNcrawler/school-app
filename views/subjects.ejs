@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <table>
+<%-include('partials/header')%>
+    <%-include('partials/nav-bar')%>
+    <table class="table">
       <tr>
-        <td>id</td>
-        <td>subject name</td>
+        <td>ID</td>
+        <td>Subject Name</td>
+        <td>Teachers</td>
+        <td>Enrolled Students</td>
       </tr>
       <%for(var subject of dataPassed.subjects){%>
       <tr>
         <td><%=subject.id%></td>
         <td><%=subject.subject_name%></td>
-      </tr>        
+        <td><%for(var teacher of subject.Teachers){%><%=teacher.getFullName()%> <br> <%}%></td>
+        <td><a href="/subjects/<%=subject.id%>/enrolledstudents">enrolledstudents</a></td>
+      </tr>
       <%}%>
     </table>
-
-  </body>
-</html>
+<%-include('partials/footer')%>
