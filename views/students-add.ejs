@@ -4,12 +4,22 @@
       <%=err%>
     <%}%>
     <form class="" action="/students/add" method="post">
-      first name:
-      <input type="text" name="first_name" value="">
-      last name:
-      <input type="text" name="last_name" value="">
-      email:
-      <input type="text" name="email" value="">
-      <input type="submit" name="" value="submit">
+    <table class="table">
+      <tr>
+        <td>first name:
+        <input type="text" name="first_name" value=""></td>
+      </tr>
+      <tr>
+        <td>last name:
+        <input type="text" name="last_name" value=""></td>
+      </tr>
+      <tr>
+        <td>email:
+        <input type="text" name="email" value=""></td>
+      </tr>
+      <tr>
+        <td><input type="submit" name="" value="submit"></td>
+      </tr>
+    </table>
     </form>
 <%-include('partials/footer')%>

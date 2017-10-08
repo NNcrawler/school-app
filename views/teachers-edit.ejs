@@ -1,19 +1,31 @@
-<%-include('partials/header', {pageTitle:''})%>
+<%-include('partials/header', {pageTitle:pageTitle})%>
     <%-include('partials/nav-bar')%>
     <form class="" action="/teachers/edit/<%=teacher.id%>" method="post">
-      First Name:
-      <input type="text" name="first_name" value="<%=teacher.first_name%>">
-      Last Name:
-      <input type="text" name="last_name" value="<%=teacher.last_name%>">
-      Email:
-      <input type="text" name="email" value="<%=teacher.email%>">
-      Subject:
-      <select class="" name="SubjectId">
-        <option value=""></option>
-        <%for(var subject of subjects){%>
-          <option value="<%=subject.id%>" <%if(teacher.SubjectId==subject.id){%><%='selected'%><%}%>><%=subject.subject_name%></option>
-        <%}%>
-      </select>
-      <input type="submit" name="" value="submit">
+    <table class="table">
+      <tr>
+        <td>First Name:
+        <input type="text" name="first_name" value="<%=teacher.first_name%>"></td>
+      </tr>
+      <tr>
+        <td>Last Name:
+        <input type="text" name="last_name" value="<%=teacher.last_name%>"></td>
+      </tr>
+      <tr>
+        <td>  Email:
+          <input type="text" name="email" value="<%=teacher.email%>"></td>
+      </tr>
+      <tr>
+        <td>Subject:
+        <select class="" name="SubjectId">
+          <option value=""></option>
+          <%for(var subject of subjects){%>
+            <option value="<%=subject.id%>" <%if(teacher.SubjectId==subject.id){%><%='selected'%><%}%>><%=subject.subject_name%></option>
+          <%}%>
+        </select></td>
+      </tr>
+      <tr>
+        <td>  <input type="submit" name="" value="submit"></td>
+      </tr>
+    </table>
     </form>
 <%-include('partials/footer')%>

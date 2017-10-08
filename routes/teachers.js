@@ -68,7 +68,8 @@ router.get('/edit/:id', (req, res)=>{
     //console.log(teacher);
     let dataPassed = {
       teacher,
-      subjects
+      subjects,
+      pageTitle:'Teachers-edit'
     }
     res.render('teachers-edit', dataPassed)
   })
