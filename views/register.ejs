@@ -1,0 +1,40 @@
+<%-include('partials/header',{pageTitle})%>
+<table class="table table-striped">
+  <form class="" action="register" method="post">
+    <tr><td><h3>REGISTER</h3></td></tr>
+    <tr>
+      <td>
+        username : <input type="text" name="username" value="">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        password : <input type="password" name="password" value="">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <select class="" name="role">
+          <%for(var i of role){%>
+            <option value="<%=i%>"><%=i%></option>
+          <%}%>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" name="" value="submit">
+      </td>
+    </tr>
+
+
+
+  </form>
+  <tr>
+    <td><a href="/login">login</a></td>
+  </tr>
+
+</table>
+
+
+<%-include('partials/footer')%>
