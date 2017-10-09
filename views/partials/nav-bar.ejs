@@ -1,12 +1,23 @@
 
+<ul class="nav justify-content-center"><li><h3 class="">Logged in as: <%=role%></h3></li></ul>
 <ul class="nav justify-content-center">
   <li class="nav-item">
     <a class="nav-link" href="/students">STUDENTS</a>
   </li>
+  <%if(role!='teacher'){%>
   <li class="nav-item">
     <a class="nav-link" href="/subjects">SUBJECTS</a>
   </li>
+  <%}%>
+
+  <%if(role!='teacher' && role!='academic'){%>
   <li class="nav-item">
     <a class="nav-link" href="/teachers">TEACHERS</a>
   </li>
+  <%}%>
+
+  <li class="nav-item">
+    <a class="nav-link" href="/login/out">LOGOUT</a>
+  </li>
+
 </ul>

@@ -2,18 +2,25 @@
 const express = require('express');
 const router = express.Router();
 const Models = require('../models');
+const accessLevel = require('../helpers/accessLevel');
+
+let permission = function(req,res,next){
+  accessLevel(req, res, next, 'students');
+}
+router.use(permission);
 
 router.get('/',(req,res)=>{
   Models.Student.findAll({order: ['first_name']}).then((students)=>{
     let dataPassed = {};
     dataPassed.pageTitle = 'Students'
     dataPassed.students = students;
+    dataPassed.role = req.session.role;
     res.render('students', {dataPassed})
   })
 })
 
 router.get('/add',(req,res)=>{
-  res.render('students-add',{pageTitle:'students-add'})
+  res.render('students-add',{pageTitle:'students-add', role:req.session.role})
 })
 
 router.post('/add', (req, res)=>{
@@ -26,6 +33,7 @@ router.post('/add', (req, res)=>{
   }).catch((err)=>{
     let dataPassed={};
     dataPassed.pageTitle='students-add'
+    dataPassed.role = req.session.role;
     dataPassed.err = err == 'SequelizeUniqueConstraintError: Validation error'? 'email sudah dipakai':'email tidak valid';
     res.render('students-add',dataPassed);
   })
@@ -43,6 +51,7 @@ router.get('/edit/:id', (req, res)=>{
   Models.Student.findById(req.params.id).then((student)=>{
     let dataPassed = {};
     dataPassed.pageTitle = 'student-edit'
+    dataPassed.role = req.session.role;
     dataPassed.student = student;
     res.render('students-edit', dataPassed);
   })
@@ -75,6 +84,7 @@ router.get('/:studentId/addsubject', (req, res)=>{
       StudentId:req.params.studentId,
       student
     }
+    dataPassed.role = req.session.role;
     res.render('students-subjects-add', dataPassed)
     //res.send(subjects)
   })

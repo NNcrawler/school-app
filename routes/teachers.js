@@ -3,7 +3,12 @@
 const express = require('express');
 const Models = require('../models');
 var router = express.Router();
+const accessLevel = require('../helpers/accessLevel');
 
+let permission = function(req,res,next){
+  accessLevel(req, res, next, 'teachers');
+}
+router.use(permission);
 
 router.get('/', (req, res)=>{
   let promiseChains = [
@@ -28,6 +33,7 @@ router.get('/', (req, res)=>{
     }
     passedData.subjects=subjects;
     passedData.teachers=teachersTemp;
+    passedData.role = req.session.role;
     //console.log(passedData.teachers[17]);
     res.render('teachers', {passedData});
   })
@@ -67,6 +73,7 @@ router.get('/edit/:id', (req, res)=>{
     let subjects = values[1];
     //console.log(teacher);
     let dataPassed = {
+      role:req.session.role,
       teacher,
       subjects,
       pageTitle:'Teachers-edit'
