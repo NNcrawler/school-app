@@ -27,8 +27,14 @@ module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    role: DataTypes.STRING,
-    salt: DataTypes.STRING
+    role: {
+      type:DataTypes.STRING,
+      validate:{notNull:true}
+    },
+    salt: {
+      type:DataTypes.STRING,
+      validate:{notNull:true}
+    }
   }, {
     classMethods: {
       associate: function(models) {
